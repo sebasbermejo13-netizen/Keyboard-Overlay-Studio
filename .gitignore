@@ -1,0 +1,22 @@
+# Datos personales de cada usuario (los crea el programa al usarlo)
+config.js
+config-anterior.js
+mis-estilos.json
+mis-plantillas.json
+studio-prefs.json
+studio-borrador.json
+error.txt
+
+# Tipografias: el programa las descarga solas de Google Fonts al usarlas
+fonts/
+
+# Restos de actualizaciones
+*.old
+src/*.exe
+
+# Editor web antiguo (ya no se usa)
+extras/
+
+# Windows
+Thumbs.db
+desktop.ini
