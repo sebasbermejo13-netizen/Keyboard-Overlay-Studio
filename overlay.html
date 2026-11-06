@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Keyboard Overlay Studio - OBS</title>
+<!--
+  ESTA es la que se pone en OBS (Fuente de navegador -> Archivo local).
+  Lee el estilo de config.js (lo escribe el editor al pulsar GUARDAR) y
+  lo vuelve a leer cada 2 segundos: al guardar en el editor, OBS se
+  actualiza solo, sin refrescar la cache.
+  Opcional: overlay.html?tilt=left / right / center / side-left / side-right / flat fuerza una inclinacion.
+-->
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+</style>
+<script src="kb-keycodes.js"></script>
+<script src="kb-render.js"></script>
+<script src="config.js"></script>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+(function () {
+    var WS_PORT = 16899; // lo sirve Keyboard Overlay Studio (o el plugin input-overlay si esta instalado)
+    var params = new URLSearchParams(location.search);
+    var forcedTilt = params.get("tilt");
+
+    var stage = document.getElementById("stage");
+    var view = null, map = {}, lastJSON = "", sock = null, useMouse = false;
+    var pressed = {}; // codigo VC -> true
+
+    function apply(cfg) {
+        var c = KBO.normalize(cfg);
+        if (forcedTilt) c.tilt.mode = forcedTilt;
+        view = KBO.render(stage, c);
+        map = KBO.codeMap(c);
+        // el plugin solo escucha el raton si el diseño tiene botones del raton
+        useMouse = (c.keys || []).some(function (k) { return (k.codes || []).some(function (x) { return x >= KBO_KEYS.MOUSE; }); });
+        tellMouse();
+        refreshAll();
+    }
+
+    function refreshAll() {
+        if (!view) return;
+        view.config.keys.forEach(function (k) {
+            var on = (k.codes || []).some(function (code) { return pressed[code]; });
+            var el = view.els[k.id];
+            if (el) el.classList.toggle("active", on);
+        });
+    }
+
+    function setCode(code, down) {
+        var ids = map[code];
+        if (!ids) return;
+        pressed[code] = down;
+        refreshAll();
+    }
+
+    apply(window.KB_CONFIG);
+    lastJSON = JSON.stringify(window.KB_CONFIG);
+
+    // vuelve a leer config.js cada 2 s (el ?t= evita la cache)
+    setInterval(function () {
+        var s = document.createElement("script");
+        s.src = "config.js?t=" + Date.now();
+        s.onload = s.onerror = function () {
+            s.remove();
+            var j = JSON.stringify(window.KB_CONFIG);
+            if (j !== lastJSON) { lastJSON = j; apply(window.KB_CONFIG); }
+        };
+        document.head.appendChild(s);
+    }, 2000);
+
+    function handle(msg) {
+        var t = msg.event_type;
+        if (t === "key_pressed") setCode(msg.keycode, true);
+        else if (t === "key_released") setCode(msg.keycode, false);
+        else if (t === "mouse_pressed") setCode(KBO_KEYS.MOUSE + msg.button, true);
+        else if (t === "mouse_released") setCode(KBO_KEYS.MOUSE + msg.button, false);
+    }
+
+    function tellMouse() { try { if (sock && sock.readyState === 1) sock.send("mouse:" + (useMouse ? 1 : 0)); } catch (e) {} }
+
+    function connect() {
+        var ws = new WebSocket("ws://127.0.0.1:" + WS_PORT + "/");
+        sock = ws;
+        ws.onopen = tellMouse;
+        ws.onmessage = function (e) { try { handle(JSON.parse(e.data)); } catch (err) {} };
+        ws.onclose = function () { pressed = {}; refreshAll(); setTimeout(connect, 1500); };
+        ws.onerror = function () { ws.close(); };
+    }
+    connect();
+})();
+</script>
+</body>
+</html>

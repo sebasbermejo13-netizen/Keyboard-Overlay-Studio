@@ -1,0 +1,34 @@
+KEYBOARD OVERLAY STUDIO
+=======================
+
+Programa para disenar el teclado que se ve en tu stream (OBS) o encima de tus
+juegos sin OBS. La guia completa esta en README.md.
+
+1) ANTES DE NADA
+   Si lo descargaste en .zip: clic derecho en el .zip -> Propiedades ->
+   Desbloquear -> Aceptar, y despues descomprimelo (en Documentos, no en
+   Archivos de programa).
+
+2) ABRIR
+   Doble clic en "Keyboard Overlay Studio.exe".
+   Si Windows muestra "Windows protegio su PC": "Mas informacion" ->
+   "Ejecutar de todas formas".
+
+3) GUARDAR
+   Boton "Guardar" (o Ctrl+S). Se escribe config.js en esta carpeta.
+
+4) OBS (solo la primera vez)
+   - Con OBS cerrado: seccion OBS -> "Instalar plugin en OBS". Asi OBS
+     ilumina las teclas el solo, sin tener este programa abierto.
+     (Sin el plugin tambien funciona dejando el programa abierto.)
+   - Fuente de navegador -> Archivo local -> overlay.html de esta carpeta.
+   - Ancho y alto: los que indica la seccion OBS del programa.
+   Desde ahi, cada vez que guardes, OBS se actualiza solo en unos 2 segundos.
+
+5) SIN OBS
+   Menu Extra -> Visor en pantalla. Ctrl+Alt+K mostrar/ocultar,
+   Ctrl+Alt+L bloquear/desbloquear.
+
+6) ACTUALIZAR
+   Copia a la carpeta nueva: config.js, mis-estilos.json,
+   mis-plantillas.json y studio-prefs.json.
