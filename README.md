@@ -1,11 +1,32 @@
+<p align="center"><img src="docs/banner.png" alt="Keyboard Overlay Studio" width="100%"></p>
+
+<p align="center">
+  <a href="https://github.com/sebasbermejo13-netizen/Keyboard-Overlay-Studio/releases/latest"><b>⬇ Descargar la última versión</b></a> ·
+  <a href="#2-descargar-e-instalar">Cómo instalar</a> ·
+  <a href="#4-ponerlo-en-obs-solo-la-primera-vez">Ponerlo en OBS</a>
+</p>
+
 # Keyboard Overlay Studio
 
 Programa para Windows que te deja **diseñar el teclado que se ve en tu stream** (OBS) y, si quieres, **verlo encima de tus juegos sin OBS**.
 
+<p align="center"><img src="docs/demo.gif" alt="Ocho estilos muy distintos animándose" width="640"></p>
+
 - Editor visual: teclas, tipografía, forma 3D, colores, ángulo, efectos al pulsar e imágenes.
 - Plantillas de juegos (Fortnite, Valorant, CS2, LoL…) con iconos de construir.
-- Estilos listos para usar y la opción de guardar, exportar e importar los tuyos.
+- 30 estilos listos para usar y la opción de guardar, exportar e importar los tuyos.
 - Visor en pantalla: el teclado flotando encima del juego, sin OBS.
+- Mini plugin propio para OBS: no necesitas input-overlay ni tener el programa abierto.
+
+### Estilos de ejemplo: fuentes, bordes, ángulos y formas totalmente distintos
+
+<p align="center"><img src="docs/estilos.png" alt="Estilos incluidos" width="100%"></p>
+
+### Así se ve
+
+| El editor | Encima del juego (sin OBS) |
+|---|---|
+| <img src="docs/editor.png" alt="Editor" width="100%"> | <img src="docs/visor.png" alt="Visor en pantalla" width="100%"> |
 
 ---
 
