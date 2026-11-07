@@ -110,6 +110,7 @@ namespace KOStudio
                 CheckDraft();
                 ObsLoop();
                 InitOverlayHost();
+                AutoUpdateCheck();
             };
         }
 
@@ -206,7 +207,8 @@ namespace KOStudio
                     new[]{"estilos","","Estilos","Plantillas y copias"},
                     new[]{"plantillas","\uE8A9","Plantillas","Juegos y grupos de teclas"} } },
                 new { G = "Extra", Items = new[] {
-                    new[]{"visor","\uE7F4","Visor en pantalla","Sin OBS, para uso personal"} } }
+                    new[]{"visor","\uE7F4","Visor en pantalla","Sin OBS, para uso personal"},
+                    new[]{"actualizaciones","\uE895","Actualizaciones","Versión " + Upd.Version} } }
             };
             int y = App.Dp(6);
             foreach (var g in groups)
@@ -351,6 +353,7 @@ namespace KOStudio
                 case "obs": SecObs(); break;
                 case "estilos": SecPresets(); break;
                 case "visor": SecOverlay(); break;
+                case "actualizaciones": SecUpdate(); break;
             }
             var pad = new Panel { BackColor = App.T.Panel }; pad.SetBounds(sx, sy, 10, App.Dp(40)); insp.Controls.Add(pad);
             insp.ResumeLayout(true);

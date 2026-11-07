@@ -55,6 +55,19 @@ Programa para Windows que te deja **diseñar el teclado que se ve en tu stream**
 
 No hay instalador: la carpeta es el programa. Para desinstalarlo, borra la carpeta.
 
+### ¿Por qué Windows dice "Windows protegió su PC"?
+
+Es el filtro SmartScreen de Windows. Salta con **cualquier programa nuevo que no tenga firma digital de pago**, aunque sea totalmente seguro: todavía no tiene "reputación" en Windows. No significa que tenga un virus.
+
+Para que puedas comprobarlo tú mismo:
+
+- **El código es abierto**: todo está en la carpeta `src` y puedes leerlo. Si prefieres no fiarte del `.exe`, compílalo tú con `src\Compilar.bat` (ver sección 9).
+- **Comprueba que el archivo no fue modificado**: en PowerShell ejecuta
+  `Get-FileHash "Keyboard Overlay Studio.exe" -Algorithm SHA256`
+  y compara con este valor (versión 1.1.0):
+  `e29cb0219e6259f9825c10f43b8c2c93aefaf01572ad2338977d8cb31db21ef8`
+- El programa no pide permisos de administrador, no instala nada fuera de su carpeta (salvo el plugin de OBS, si pulsas el botón) y solo se conecta a internet para descargar fuentes de Google Fonts y, si lo dejas activado, para mirar si hay una versión nueva en GitHub.
+
 ---
 
 ## 3. Primer uso
@@ -126,7 +139,11 @@ Funciona con juegos en **ventana** o **pantalla completa sin bordes**. En pantal
 
 ## 7. Actualizar a una versión nueva
 
-Tus cosas están en estos archivos de la carpeta. **Cópialos a la carpeta nueva** antes de borrar la vieja:
+**Automático (desde la 1.1.0):** cada vez que abres el programa mira en GitHub si hay una versión nueva. Si la hay, te sale un aviso y con **Actualizar ahora** la descarga, comprueba su SHA256, se cierra, se reemplaza solo y se vuelve a abrir. También puedes ir a **Extra → Actualizaciones** y pulsar **Buscar actualizaciones**, o desactivar la búsqueda automática allí.
+
+**Tus archivos no se tocan** al actualizar: `config.js`, `mis-estilos.json`, `mis-plantillas.json` y `studio-prefs.json` se quedan como están.
+
+**Manual (si vienes de una versión anterior a la 1.1.0, o si prefieres hacerlo a mano):** descarga la versión nueva y **copia a la carpeta nueva** los archivos de esta tabla antes de borrar la vieja:
 
 | Archivo | Qué es |
 |---|---|

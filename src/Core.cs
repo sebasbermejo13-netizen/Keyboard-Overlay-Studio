@@ -393,6 +393,10 @@ namespace KOStudio
         public bool tips = true;
         public string bg = "game";
         public bool autoEdit = true;
+        // actualizaciones
+        public bool autoUpdate = true;
+        public long lastUpdateCheck;
+        public string notifiedVersion = "";
         public List<string> recentColors = new List<string>();
         // visor en pantalla
         public bool overlayOn, overlayLocked = true, keepInTray = true, overlayAnim = true;
